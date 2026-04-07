@@ -1,0 +1,62 @@
+name: adspend-personalizer
+version: "0.2.0"
+description: >
+  Ad-spend pacing RL environment that simulates a full advertising campaign day
+  split into 48 half-hour auction slots. An agent must decide how aggressively
+  to bid in each slot to maximise revenue while staying within a daily budget.
+  Three tasks cover budget pacing (easy), ROAS maximisation (medium), and
+  high-value whale-customer hunting with a mid-day budget shock (hard).
+
+author: adspend-team
+license: MIT
+tags:
+  - advertising
+  - budget-pacing
+  - roas
+  - real-world
+  - openenv
+
+environment:
+  class: AdSpendEnvironment
+  module: server.adspend_env_environment
+  action_type: AdSpendAction
+  observation_type: AdSpendObservation
+
+tasks:
+  - id: easy
+    name: budget_pacing_easy
+    description: >
+      Deliver 5 conversions while keeping spend at or below a $200 budget.
+      Score rewards conversion progress, target accuracy, and budget efficiency.
+    difficulty: easy
+    max_steps: 48
+    score_range: [0.0, 1.0]
+
+  - id: medium
+    name: maximize_roas_medium
+    description: >
+      Maximise Return on Ad Spend (ROAS) while spending 30–60% of a $1000
+      daily budget across 48 auction slots.
+    difficulty: medium
+    max_steps: 48
+    score_range: [0.0, 1.0]
+
+  - id: hard
+    name: whale_hunter_hard
+    description: >
+      Convert as many high-value "whale" customers (LTV ≥ $80) as possible.
+      A budget shock halves the remaining budget at slot 24 (noon), forcing
+      the agent to adapt its strategy mid-episode.
+    difficulty: hard
+    max_steps: 48
+    score_range: [0.0, 1.0]
+
+endpoints:
+  reset: /reset
+  step:  /step
+  state: /state
+  health: /health
+
+server:
+  host: "0.0.0.0"
+  port: 8000
