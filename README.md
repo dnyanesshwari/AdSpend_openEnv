@@ -252,7 +252,4 @@ adspend_env/
         └── task_hard.py
 ```
 
-## Current caveats
-
-- `openenv.yaml` and some older source comments still contain legacy text or encoding artifacts in a few places
-- Docker and HF deployment are prepared but should still be verified in the target runtime
+  
