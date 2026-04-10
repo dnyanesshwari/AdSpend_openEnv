@@ -228,77 +228,7 @@ Recommended configuration:
 
 The project includes a root `Dockerfile` and the FastAPI server reads `PORT`, which makes it suitable for container deployment.
 
-## Rubric-based evaluation
-
-This is my honest evaluation of the current project against your rubric.
-
-### Real-world utility: 27/30
-
-Why:
-
-- strong real business domain
-- good modeling of budget pacing, ROAS, and high-value customer selection
-- useful for benchmarking decision-making agents in ad-tech
-
-Why not full score:
-
-- the simulation is still stylized rather than calibrated against a real ad platform or production dataset
-
-### Task and grader quality: 22/25
-
-Why:
-
-- 3 tasks with clear difficulty progression
-- graders are deterministic and normalized to `[0.0, 1.0]`
-- hard task introduces a real adaptation challenge through the budget shock
-
-Why not full score:
-
-- the medium baseline still under-targets the intended spend band, which means the task is good but the current baseline is not especially strong
-- hard is meaningful, but calling it definitively frontier-challenging would require stronger model benchmarking evidence
-
-### Environment design: 18/20
-
-Why:
-
-- `reset()` now produces clean task-aware state
-- observation, action, and state are typed and meaningful
-- reward is dense and varied
-- episode boundaries are sensible
-
-Why not full score:
-
-- some legacy text in the repo still describes older behavior
-- the environment is strong, but not yet documented as a full formal MDP spec
-
-### Code quality and spec compliance: 10/15
-
-Confirmed:
-
-- `openenv validate .` passes
-- baseline scripts run and reproduce scores
-- root `Dockerfile` exists and is configured for Space-style execution
-
-Not fully confirmed in this session:
-
-- I did not execute a full `docker build && docker run`
-- I did not deploy to an actual Hugging Face Space from this environment
-
-### Creativity and novelty: 9/10
-
-Why:
-
-- ad-spend pacing is less common than typical toy benchmarks
-- whale targeting and budget shock make the environment more interesting
-- reward decomposition is more thoughtful than a simple binary success design
-
-### Total: 86/100
-
-Interpretation:
-
-- strong project overall
-- good submission candidate
-- most remaining risk is around deployment verification and final consistency cleanup rather than the core environment idea
+ 
 
 ## Project structure
 
